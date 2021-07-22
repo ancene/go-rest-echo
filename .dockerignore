@@ -1,0 +1,16 @@
+# file
+.dockerignore
+.env.example
+.gitattributes
+.gitignore
+cover.out
+Dockerfile
+LICENSE
+Makefile
+README.md
+
+# folder
+.github/
+.git/
+.vscode/
+.scannerwork/
