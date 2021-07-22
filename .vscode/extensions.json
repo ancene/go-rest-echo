@@ -1,0 +1,10 @@
+{
+    "recommendations": [
+        "humao.rest-client",
+        "golang.go",
+        "editorconfig.editorconfig",
+        "mikestead.dotenv",
+        "eamodio.gitlens",
+        "pkief.material-icon-theme"
+    ]
+}
