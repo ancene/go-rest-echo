@@ -2,6 +2,7 @@ package main
 
 import (
 	"context"
+	"log"
 	"net/http"
 	"os"
 	"os/signal"
@@ -20,7 +21,7 @@ func main() {
 	/* Configuration
 	/********** ********** ********** ********** **********/
 	if err := godotenv.Load(); err != nil {
-		println("error loading .env file")
+		log.Fatal(err)
 	}
 	cfg := domain.NewConfiguration()
 
@@ -30,7 +31,7 @@ func main() {
 	/********** ********** ********** ********** **********/
 	dbPG, err := connection.NewPostgresConnection(cfg)
 	if err != nil {
-		panic(err)
+		log.Fatal(err)
 	}
 
 	/********** ********** ********** ********** **********/
