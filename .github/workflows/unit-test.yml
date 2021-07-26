@@ -69,6 +69,7 @@ jobs:
           echo PG_USERNAME=user >> .env.test
           echo PG_PASSWORD=password >> .env.test
           echo PG_DATABASE=example >> .env.test
+          cat .env.test
 
     #   - name: Run Migration
     #     run: make
