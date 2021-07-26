@@ -7,15 +7,31 @@ on:
   pull_request:
     branches:
       - master
-
+# 
 jobs:
   test:
     strategy:
       matrix:
-        os: [ubuntu-latest, macos-latest, windows-latest]
-        go: [1.14, 1.15, 1.16]
+        os: [ubuntu-latest]
+        go: [1.16]
     name: ${{ matrix.os }} @ Go ${{ matrix.go }}
     runs-on: ${{ matrix.os }}
+
+    services:
+      postgres:
+        image: postgres:12-alpine
+        env:
+          POSTGRES_USER: user
+          POSTGRES_PASSWORD: password
+          POSTGRES_DB: example
+        ports:
+          - 5433:5432
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+
     steps:
       - name: Set up Go ${{ matrix.go }}
         uses: actions/setup-go@v1
@@ -40,7 +56,8 @@ jobs:
       - name: Install Dependencies
         run: go get -v golang.org/x/lint/golint
 
+    #   - name: Run Migration
+    #     run: make
+
       - name: Run Tests
-        run: |
-          golint -set_exit_status ./...
-          go test -race ./internal/... ./pkg/...
+        run: go test -race ./internal/... ./pkg/...
