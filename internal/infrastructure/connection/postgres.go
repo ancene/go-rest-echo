@@ -18,7 +18,6 @@ func NewPostgresConnection(cfg *domain.Configuration) (*sql.DB, error) {
 
 	db, err := sql.Open("postgres", dsn)
 	if err != nil {
-		log.Println("1", dsn, err)
 		return nil, err
 	}
 
