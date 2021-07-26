@@ -25,9 +25,17 @@ func NewServer(cfg *domain.Configuration, db *sql.DB) *echo.Echo {
 	e.Use(middleware.BodyLimit(), middleware.Gzip())
 
 	/** +----- ioc -----+ **/
+	// root
+	handRoot := handler.NewRootHandler(cfg)
+
+	// todo
 	repoTodo := mysqldb.NewTodoRepository(db)
 	useTodo := usecase.NewTodoUsecase(repoTodo)
 	handTodo := handler.NewTodoHandler(useTodo)
+
+	/** +----- routes / -----+ **/
+	e.GET("/", handRoot.Home)
+	e.GET("/health", handRoot.Health)
 
 	/** +----- Resouces routes /todos -----+ **/
 	e.GET("/todos/:id", handTodo.GetByID)
