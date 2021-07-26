@@ -23,7 +23,7 @@ func NewPostgresConnection(cfg *domain.Configuration) (*sql.DB, error) {
 
 	err = db.Ping()
 	if err != nil {
-		log.Println("2", dsn, err)
+		log.Println("error ping ->", dsn, "->", err)
 		return nil, err
 	}
 
