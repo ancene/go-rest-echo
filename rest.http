@@ -1,0 +1,10 @@
+@domain = http://localhost:8080
+
+### ROOT
+GET {{domain}}
+
+### health
+GET {{domain}}/health
+
+### Get Todo By ID
+GET {{domain}}/todos/id
