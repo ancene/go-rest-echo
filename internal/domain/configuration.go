@@ -8,6 +8,7 @@ import (
 type app struct {
 	Host string
 	Port int
+	Name string
 }
 
 type pg struct {
@@ -38,6 +39,7 @@ func NewConfiguration() *Configuration {
 		App: app{
 			Host: os.Getenv("APP_HOST"),
 			Port: ap,
+			Name: os.Getenv("APP_NAME"),
 		},
 		Postgres: pg{
 			Host:     os.Getenv("PG_HOST"),
