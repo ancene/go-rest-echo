@@ -75,3 +75,13 @@ jobs:
 
       - name: Run Tests
         run: go test ./internal/... ./pkg/...
+
+      - name: Run Tests Coverage
+        run: go test --coverprofile=coverage.coverprofile --covermode=atomic ./internal/... ./pkg/...
+
+      - name: Upload coverage to Codecov
+        if: success() && matrix.go == 1.16 && matrix.os == 'ubuntu-latest'
+        uses: codecov/codecov-action@v1
+        with:
+            token:
+            fail_ci_if_error: false
