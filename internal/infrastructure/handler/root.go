@@ -2,7 +2,7 @@ package handler
 
 import (
 	"github.com/ancene/go-rest-echo/internal/domain"
-	"github.com/ancene/go-rest-echo/internal/infrastructure/serializer"
+	"github.com/ancene/go-rest-echo/internal/infrastructure/serialization"
 	"github.com/labstack/echo/v4"
 )
 
@@ -17,7 +17,7 @@ func NewRootHandler(config *domain.Configuration) *RootHanlder {
 }
 
 func (rh *RootHanlder) Home(c echo.Context) error {
-	return c.JSON(200, serializer.OK("welcome to ancene", []string{}))
+	return c.JSON(200, serialization.OK("welcome to ancene", []string{}))
 }
 
 func (rh *RootHanlder) Health(c echo.Context) error {
@@ -29,5 +29,5 @@ func (rh *RootHanlder) Health(c echo.Context) error {
 		},
 		"memory": "good",
 	}
-	return c.JSON(200, serializer.OK(rh.config.App.Name+" is healhty", data))
+	return c.JSON(200, serialization.OK(rh.config.App.Name+" is healhty", data))
 }
