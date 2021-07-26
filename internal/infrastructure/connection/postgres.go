@@ -4,7 +4,6 @@ import (
 	"database/sql"
 	"errors"
 	"fmt"
-	"log"
 
 	"github.com/ancene/go-rest-echo/internal/domain"
 )
@@ -23,7 +22,6 @@ func NewPostgresConnection(cfg *domain.Configuration) (*sql.DB, error) {
 
 	err = db.Ping()
 	if err != nil {
-		log.Println("error ping ->", dsn, "->", err)
 		return nil, err
 	}
 
