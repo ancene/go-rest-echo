@@ -12,8 +12,8 @@ jobs:
   test:
     strategy:
       matrix:
-        #  macos-latest, windows-latest
-        os: [ubuntu-latest]
+        #  macos-latest
+        os: [ubuntu-latest, windows-latest]
         go: [1.14, 1.15, 1.16]
     name: ${{ matrix.os }} @ Go ${{ matrix.go }}
     runs-on: ${{ matrix.os }}
@@ -70,10 +70,9 @@ jobs:
           echo PG_USERNAME=user >> .env.test
           echo PG_PASSWORD=password >> .env.test
           echo PG_DATABASE=example >> .env.test
-          cat .env.test
 
-    #   - name: Run Migration
-    #     run: make
+      - name: Run Migration
+        run: echo "run migration"
 
       - name: Run Tests
         run: go test ./internal/... ./pkg/...
