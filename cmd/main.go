@@ -14,6 +14,7 @@ import (
 	"github.com/ancene/go-rest-echo/internal/infrastructure/connection"
 	"github.com/joho/godotenv"
 	_ "github.com/lib/pq"
+	// _ "github.com/go-sql-driver/mysql" // uncomment this if using mysql
 )
 
 func main() {
