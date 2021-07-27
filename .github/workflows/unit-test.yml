@@ -39,9 +39,9 @@ jobs:
           MYSQL_USER: user
           MYSQL_PASSWORD: password
           MYSQL_ROOT_PASSWORD: rootpassword
-          ports:
-            # - 33306:3306
-            - 3306:3306
+        ports:
+          - 33306:3306
+          - 3306:3306
         options: >-
           --health-cmd "mysqladmin ping"
           --health-interval 10s 
