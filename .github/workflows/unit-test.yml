@@ -32,6 +32,22 @@ jobs:
           --health-timeout 5s
           --health-retries 5
 
+      mysql:
+        image: mysql:8
+        env:
+          MYSQL_DATABASE: example
+          MYSQL_USER: user
+          MYSQL_PASSWORD: password
+          MYSQL_ROOT_PASSWORD: rootpassword
+          ports:
+            - 33306:3306
+            - 3306:3306
+        options: >-
+          --health-cmd "mysqladmin ping"
+          --health-interval 10s 
+          --health-timeout 5s 
+          --health-retries 5
+
     steps:
       - name: Set up Go ${{ matrix.go }}
         uses: actions/setup-go@v1
@@ -69,6 +85,12 @@ jobs:
           echo PG_USERNAME=user >> .env.test
           echo PG_PASSWORD=password >> .env.test
           echo PG_DATABASE=example >> .env.test
+
+          echo MYSQL_HOST=localhost >> .env.test
+          echo MYSQL_PORT=3306 >> .env.test
+          echo MYSQL_USERNAME=root >> .env.test
+          echo MYSQL_PASSWORD= >> .env.test
+          echo MYSQL_DATABASE=example >> .env.test
 
       - name: Run Migration
         run: echo "run migration"
