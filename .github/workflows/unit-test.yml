@@ -88,8 +88,8 @@ jobs:
 
           echo MYSQL_HOST=localhost >> .env.test
           echo MYSQL_PORT=3306 >> .env.test
-          echo MYSQL_USERNAME=root >> .env.test
-          echo MYSQL_PASSWORD= >> .env.test
+          echo MYSQL_USERNAME=user >> .env.test
+          echo MYSQL_PASSWORD=password >> .env.test
           echo MYSQL_DATABASE=example >> .env.test
 
       - name: Run Migration
