@@ -19,9 +19,18 @@ type pg struct {
 	Database string
 }
 
+type mysql struct {
+	Host     string
+	Port     int
+	Username string
+	Password string
+	Database string
+}
+
 type Configuration struct {
 	App      app
 	Postgres pg
+	Mysql    mysql
 }
 
 func NewConfiguration() *Configuration {
@@ -33,6 +42,11 @@ func NewConfiguration() *Configuration {
 	pgp, err := strconv.Atoi(os.Getenv("PG_PORT"))
 	if err != nil {
 		ap = 5432
+	}
+
+	myp, err := strconv.Atoi(os.Getenv("MYSQL_PORT"))
+	if err != nil {
+		ap = 3306
 	}
 
 	return &Configuration{
@@ -47,6 +61,13 @@ func NewConfiguration() *Configuration {
 			Username: os.Getenv("PG_USERNAME"),
 			Password: os.Getenv("PG_PASSWORD"),
 			Database: os.Getenv("PG_DATABASE"),
+		},
+		Mysql: mysql{
+			Host:     os.Getenv("MYSQL_HOST"),
+			Port:     myp,
+			Username: os.Getenv("MYSQL_USERNAME"),
+			Password: os.Getenv("MYSQL_PASSWORD"),
+			Database: os.Getenv("MYSQL_DATABASE"),
 		},
 	}
 }
