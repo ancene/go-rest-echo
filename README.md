@@ -1,4 +1,4 @@
-# Go (Golang) REST API with Echo Framework
+# Go (golang) REST API with Echo Framework
 
 [![Sourcegraph](https://sourcegraph.com/github.com/ancene/go-rest-echo/-/badge.svg?style=flat-square)](https://sourcegraph.com/github.com/ancene/go-rest-echo?badge)
 [![GoDoc](http://img.shields.io/badge/go-documentation-blue.svg?style=flat-square)](https://pkg.go.dev/github.com/ancene/go-rest-echo)
