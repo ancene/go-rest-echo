@@ -28,6 +28,14 @@ func TestNewMysqlConnection(t *testing.T) {
 		assert.Nil(t, db)
 	})
 
+	t.Run("error failed open to connection", func(t *testing.T) {
+		conf := &domain.Configuration{}
+		conf.Mysql.Database = "/a/a/a/a/a"
+		db, err := NewMysqlConnection(conf)
+		assert.Error(t, err)
+		assert.Nil(t, db)
+	})
+
 	t.Run("error can't connect to database", func(t *testing.T) {
 		conf := &domain.Configuration{}
 		db, err := NewMysqlConnection(conf)
