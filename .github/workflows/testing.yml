@@ -1,4 +1,4 @@
-name: Run Unit Tests
+name: Testing
 
 on:
   push:
@@ -79,6 +79,7 @@ jobs:
           echo APP_HOST=localhost >> .env.test
           echo APP_PORT=8080 >> .env.test
           echo APP_NAME=go-rest-echo >> .env.test
+          echo APP_TIMEZONE=UTC >> .env.test
 
           echo PG_HOST=localhost >> .env.test
           echo PG_PORT=5432 >> .env.test
