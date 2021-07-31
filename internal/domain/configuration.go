@@ -6,9 +6,10 @@ import (
 )
 
 type app struct {
-	Host string
-	Port int
-	Name string
+	Host     string
+	Port     int
+	Name     string
+	Timezone string
 }
 
 type pg struct {
@@ -41,19 +42,20 @@ func NewConfiguration() *Configuration {
 
 	pgp, err := strconv.Atoi(os.Getenv("PG_PORT"))
 	if err != nil {
-		ap = 5432
+		pgp = 5432
 	}
 
 	myp, err := strconv.Atoi(os.Getenv("MYSQL_PORT"))
 	if err != nil {
-		ap = 3306
+		myp = 3306
 	}
 
 	return &Configuration{
 		App: app{
-			Host: os.Getenv("APP_HOST"),
-			Port: ap,
-			Name: os.Getenv("APP_NAME"),
+			Host:     os.Getenv("APP_HOST"),
+			Port:     ap,
+			Name:     os.Getenv("APP_NAME"),
+			Timezone: os.Getenv("APP_TIMEZONE"),
 		},
 		Postgres: pg{
 			Host:     os.Getenv("PG_HOST"),
