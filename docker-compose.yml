@@ -1,0 +1,86 @@
+version: '3'
+services:
+  go-rest-echo:
+    container_name: go-rest-echo
+    build: .
+    ports: 
+      - 8080:8080 
+    restart: always
+    # volumes:
+    #   - go-rest-echo:/usr/src/app/
+    depends_on:
+      - app-db-postgres
+    #   - app-db-mysql
+    networks:
+      - go-rest-echo-network
+
+  app-db-postgres:
+    image: postgres:13-alpine
+    container_name: app-db-postgres
+    environment:
+      - POSTGRES_USER=${DB_USER}  
+      - POSTGRES_PASSWORD=${DB_PASSWORD}
+      - POSTGRES_DB=${DB_NAME}
+      - DATABASE_HOST=${DB_HOST} 
+    ports:
+      - '${DB_PORT}:5432'
+    volumes:
+      - database_postgres:/var/lib/postgresql/data
+    networks:
+      - go-rest-echo-network
+    
+  # pgadmin:
+  #   image: dpage/pgadmin4
+  #   container_name: pgadmin_container
+  #   environment:
+  #     PGADMIN_DEFAULT_EMAIL: ${PGADMIN_DEFAULT_EMAIL}
+  #     PGADMIN_DEFAULT_PASSWORD: ${PGADMIN_DEFAULT_PASSWORD}
+  #   depends_on:
+  #     - fullstack-postgres
+  #   ports:
+  #     - "5050:80"
+  #   networks:
+  #     - fullstack
+  #   restart: unless-stopped
+
+  
+#   fullstack-mysql:
+#     image: mysql:5.7
+#     container_name: full_db_mysql
+#     ports: 
+#       - 3306:3306
+#     environment: 
+#       - MYSQL_ROOT_HOST=${DB_HOST} 
+#       - MYSQL_USER=${DB_USER}
+#       - MYSQL_PASSWORD=${DB_PASSWORD}
+#       - MYSQL_DATABASE=${DB_NAME}
+#       - MYSQL_ROOT_PASSWORD=${DB_PASSWORD}
+#     volumes:
+#       - database_mysql:/var/lib/mysql
+#     networks:
+#       - fullstack
+  
+#   phpmyadmin:
+#     image: phpmyadmin/phpmyadmin
+#     container_name: phpmyadmin_container
+#     depends_on:
+#       - fullstack-mysql
+#     environment:
+#       - PMA_HOST=fullstack-mysql # Note the "mysql". Must be the name of the what you used as the mysql service.
+#       - PMA_USER=${DB_USER}
+#       - PMA_PORT=${DB_PORT}
+#       - PMA_PASSWORD=${DB_PASSWORD}
+#     ports:
+#       - 9090:80
+#     restart: always
+#     networks:
+#       - fullstack
+
+volumes:
+  go-rest-echo:
+  database_postgres:
+#   database_mysql:
+
+networks:
+  go-rest-echo-network:
+    driver: bridge

@@ -29,6 +29,18 @@ func TestNewPostgresConnection(t *testing.T) {
 		assert.Nil(t, db)
 	})
 
+	t.Run("error failed open to connection", func(t *testing.T) {
+		conf := &domain.Configuration{}
+		conf.Postgres.Host = "\"/\\"
+		conf.Postgres.Port = 9_223_371_999_999_999_999
+		conf.Postgres.Username = "=/==/="
+		conf.Postgres.Password = "=/==/="
+		conf.Postgres.Database = "=/==/= sslmode=true"
+		db, err := NewPostgresConnection(conf)
+		assert.Error(t, err)
+		assert.Nil(t, db)
+	})
+
 	t.Run("error can't connect to database", func(t *testing.T) {
 		conf := &domain.Configuration{}
 		db, err := NewPostgresConnection(conf)
